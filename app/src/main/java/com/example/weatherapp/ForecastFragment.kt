@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import com.example.weatherapp.databinding.FragmentForecastBinding
+import com.example.weatherapp.models.DayForecast
+import com.example.weatherapp.models.ForecastTemp
 
 private val forecastData = listOf(
     DayForecast(1664399820L, 1664366760L, 1664409480L,

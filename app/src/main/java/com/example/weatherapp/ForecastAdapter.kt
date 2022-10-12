@@ -1,19 +1,12 @@
 package com.example.weatherapp
 
-import android.content.Context
-import android.content.res.Resources
-import android.os.Build
-import android.provider.Settings.System.getString
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
-
-import androidx.core.content.res.TypedArrayUtils.getText
 
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherapp.models.DayForecast
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -54,7 +47,7 @@ class ForecastViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     private fun makeDate(stamp: Long): String {
-        val formatter = DateTimeFormatter.ofPattern("MMM dd")
+        val formatter = DateTimeFormatter.ofPattern("MMM d")
         val dateTime = LocalDateTime.ofEpochSecond(stamp, 0, ZoneOffset.of("-5"))
         return formatter.format(dateTime)
     }
