@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">The Most Awesomiest Weather App</string>
     <string name="city_name">Saint Paul, MN</string>
-    <string name="current_temp">72º</string>
-    <string name="feels_like">Feels like 78º</string>
-    <string name="low_temp">Low 65º</string>
-    <string name="high_temp">High 80º</string>
-    <string name="humidity">Humidity 100%</string>
-    <string name="pressure">Pressure 1023 hPa</string>
+    <string name="current_temp">%d°</string>
+    <string name="feels_like">Feels like %d°</string>
+    <string name="low_temp">Low %d°</string>
+    <string name="high_temp">High %d°</string>
+    <string name="humidity">Humidity %d%%</string>
+    <string name="pressure">Pressure %d hPa</string>
     <string name="clear_sky_icon">Clear Sky</string>
     <string name="forecast">Forecast</string>
-    <string name="sunrise">"Sunrise: %1$s"</string>
-    <string name="sunset">"Sunset: %1$s"</string>
-    <string name="day_temp">"Temp: %1$s°"</string>
-    <string name="min_temp">"Low: %1$s°"</string>
-    <string name="max_temp">"High: %1$s°"</string>
+    <string name="sunrise">"Sunrise: %s"</string>
+    <string name="sunset">"Sunset: %s"</string>
+    <string name="day_temp">"Temp: %d°"</string>
+    <string name="min_temp">"Low: %d°"</string>
+    <string name="max_temp">"High: %d°"</string>
 </resources>
