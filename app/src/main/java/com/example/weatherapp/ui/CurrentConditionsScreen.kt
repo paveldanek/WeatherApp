@@ -1,8 +1,6 @@
 package com.example.weatherapp.ui
 
 import android.annotation.SuppressLint
-import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -14,7 +12,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -27,25 +24,29 @@ import coil.compose.AsyncImage
 
 import com.example.weatherapp.R
 import com.example.weatherapp.models.CurrentConditions
+import com.example.weatherapp.models.LatitudeLongitude
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CurrentConditions(
+    latitudeLongitude: LatitudeLongitude?,
     viewModel: CurrentConditionsViewModel = hiltViewModel(),
+    onMyLocationButtonClick: () -> Unit,
     onForecastButtonClick: () -> Unit,
 ) {
     val state by viewModel.currentConditions.collectAsState(null)
 
-    LaunchedEffect(Unit) {
-        viewModel.fetchData()
+    if (latitudeLongitude != null) {
+        LaunchedEffect(Unit) { viewModel.fetchMyLocationData(latitudeLongitude) }
+    } else {
+        LaunchedEffect(Unit) { viewModel.fetchData() }
     }
+
     Scaffold(
         topBar = { AppBar(title = stringResource(id = R.string.app_name)) }
     ) {
         state?.let {
-            CurrentConditionsContent(it) {
-                onForecastButtonClick()
-            }
+            CurrentConditionsContent(it, onMyLocationButtonClick, onForecastButtonClick)
         }
     }
 }
@@ -53,6 +54,7 @@ fun CurrentConditions(
 @Composable
 private fun CurrentConditionsContent(
    currentConditions: CurrentConditions,
+   onMyLocationButtonClick: () -> Unit,
    onForecastButtonClick: () -> Unit,
 ) {
         Column(
@@ -115,15 +117,21 @@ private fun CurrentConditionsContent(
                 )
             }
             Spacer(modifier = Modifier.height(50.dp))
-            val onClick = {
+/*            val onClick = {
                 Log.d("Debugging", "onClickCall")
                 onForecastButtonClick()
             }
-            Button(onClick = onClick) {
+*/          Button(onClick = onForecastButtonClick) {
                 Text(
                     modifier = Modifier.width(90.dp),
                     textAlign = TextAlign.Center,
                     text = stringResource(id = R.string.forecast)
+                )
+            }
+            Spacer(Modifier.height(25.dp))
+            Button(onClick = onMyLocationButtonClick) {
+                Text(
+                    text = stringResource(id = R.string.my_location)
                 )
             }
         }
@@ -132,7 +140,6 @@ private fun CurrentConditionsContent(
 @Preview
 @Composable
 fun CurrentConditionsPreview() {
-    CurrentConditions {}
 }
 
 

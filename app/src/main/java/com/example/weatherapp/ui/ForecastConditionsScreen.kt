@@ -25,17 +25,22 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import com.example.weatherapp.R
 import com.example.weatherapp.models.FWeatherData
+import com.example.weatherapp.models.LatitudeLongitude
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ForecastConditions(
+    latitudeLongitude: LatitudeLongitude?,
     viewModel: ForecastConditionsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.forecastConditions.collectAsState(null)
 
-    LaunchedEffect(Unit) {
-        viewModel.fetchData()
+    if (latitudeLongitude != null) {
+        LaunchedEffect(Unit) { viewModel.fetchMyLocationData(latitudeLongitude) }
+    } else {
+        LaunchedEffect(Unit) { viewModel.fetchData() }
     }
+
     Scaffold(
         topBar = { AppBar(title = stringResource(id = R.string.forecast)) }
     ) { state?.let {
@@ -110,6 +115,5 @@ private fun ForecastRow(item: FWeatherData) {
 @Preview
 @Composable
 private fun ForecastScreenPreview() {
-    ForecastConditions()
 }
 
