@@ -9,9 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 //import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.ui.CurrentConditions
-import com.example.weatherapp.ui.ForecastScreen
+import com.example.weatherapp.ui.ForecastConditions
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
 //    private lateinit var viewModel: MainViewModel
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 composable("Forecast") {
-                    ForecastScreen()
+                    ForecastConditions()
                 }
             }
         }
